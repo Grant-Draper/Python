@@ -35,6 +35,12 @@ if start == "y":
     print ("Machine type: %s" % (platforminfo[4]))
     print ("Processor type: %s" % (platforminfo[5]))
 
+    #potential function to identify platform then run os specific file structure commands
+    if platforminfo[0].lower() == "windows":
+        print("works")
+    elif platforminfo[0].lower() == "unix":
+        print ("unix")
+
 
 elif start == "n":
     print ("Fine be that way!")
