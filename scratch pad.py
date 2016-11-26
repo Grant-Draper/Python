@@ -5,3 +5,7 @@ print platform.release()
 print platform.machine()
 
 change testerujseckbweuc
+
+
+
+changes
