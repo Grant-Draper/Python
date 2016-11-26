@@ -37,7 +37,9 @@ if start == "y":
 
     #potential function to identify platform then run os specific file structure commands
     if platforminfo[0].lower() == "windows":
-        print("works")
+        print("windows")
+    elif platforminfo[0].lower() == "linux":
+        print ("linux")
     elif platforminfo[0].lower() == "unix":
         print ("unix")
 
