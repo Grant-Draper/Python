@@ -17,19 +17,35 @@
    # if not entry.name.startswith('.') and entry.is_file():
    #     print
 
-from os import scandir
+# from os import scandir
 
-path = "C:\\"
+# path = "C:\\"
+#
+# def scantree(path):
+#     """Recursively yield DirEntry objects for given directory."""
+#     for entry in scandir(path):
+#         if entry.is_dir(follow_symlinks=False):
+#             yield from scantree(entry.path)  # see below for Python 2.x
+#         else:
+#             yield entry
+#
+# if __name__ == '__main__':
+#     import sys
+#     for entry in scantree(sys.argv[1] if len(sys.argv) > 1 else '.'):
+#         print(entry.path)
 
-def scantree(path):
-    """Recursively yield DirEntry objects for given directory."""
-    for entry in scandir(path):
-        if entry.is_dir(follow_symlinks=False):
-            yield from scantree(entry.path)  # see below for Python 2.x
-        else:
-            yield entry
+import os
 
-if __name__ == '__main__':
-    import sys
-    for entry in scantree(sys.argv[1] if len(sys.argv) > 1 else '.'):
-        print(entry.path)
+# path = os.walk("C:\\")
+#
+# print (path)
+
+
+for path, dirs, files in os.walk("C:\Users\Admin"):
+  print (path)
+
+  for d in dirs:
+    print (d)
+
+  for f in files:
+    print (f)
