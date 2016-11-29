@@ -50,17 +50,24 @@
 #   # for f in files:
 #   #   print (f)
 import os
-fs = os.walk("C:\\Users\Admin\Desktop\Test")
+from os.path import join, getsize
+#file path for QA
+#fs = os.walk("C:\\Users\Admin\Desktop\Test")
 
+#filepath for home
+fs = os.walk("C:\\Users\grant\Desktop\Training")
+print (fs)
 
-
-
+for a, b, c in fs:
+    print (a)
+    print (b ,c )
+    print [getsize for a]
 # import os
 # from os.path import join, getsize
 #
 # for root, dirs, files in os.walk("C:\\Users\Admin\Desktop\Test"):
 #  # print(root, "consumes ", end="")
-#  # print(sum([getsize(join(root, name)) for name in files]), end="")
+    print(sum([getsize(join(root, name)) for name in files]), end="")
 # #  print(" bytes in", len(files), "non-directory files")
 #
 #    print ([getsize for files in ])
