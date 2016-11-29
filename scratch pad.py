@@ -34,18 +34,53 @@
 #     for entry in scantree(sys.argv[1] if len(sys.argv) > 1 else '.'):
 #         print(entry.path)
 
-import os
-
-# path = os.walk("C:\\")
+# import os
 #
-# print (path)
+# # path = os.walk("C:\\")
+# #
+# # print (path)
+#
+# #
+# # for path, dirs, files in os.walk("C:\\Users\Admin\Desktop\Test"):
+# #   print (path)
+#
+#   # for d in dirs:
+#   #   print (d)
+#   #
+#   # for f in files:
+#   #   print (f)
+import os
+fs = os.walk("C:\\Users\Admin\Desktop\Test")
 
 
-for path, dirs, files in os.walk("C:\Users\Admin"):
-  print (path)
 
-  for d in dirs:
-    print (d)
 
-  for f in files:
-    print (f)
+# import os
+# from os.path import join, getsize
+#
+# for root, dirs, files in os.walk("C:\\Users\Admin\Desktop\Test"):
+#  # print(root, "consumes ", end="")
+#  # print(sum([getsize(join(root, name)) for name in files]), end="")
+# #  print(" bytes in", len(files), "non-directory files")
+#
+#    print ([getsize for files in ])
+#
+# #  print (root ,"consumes", )
+#  # print(dirs)
+#   #print (files)
+
+
+
+
+#working code extracted from help(os.walk)
+
+# import os
+# from os.path import join, getsize
+#
+# for root, dirs, files in os.walk('python/Lib/email'):
+#   print(root, "consumes", end="")
+#   print(sum([getsize(join(root, name)) for name in files]), end="")
+#   print("bytes in", len(files), "non-directory files")
+
+
+
