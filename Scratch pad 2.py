@@ -50,8 +50,13 @@ for filepath, directorys, files in os.walk("C:\\Users\Admin\Desktop\Test"):
 
 
 
+
+
+
 """function for converting filesize in bytes to kb, mb, gb"""
 
+
+#need to test and remove the floating point values
 bitesize = int(input("enter bytes"))
 
 def filesize(bytesize):
