@@ -45,7 +45,7 @@ for filepath, directorys, files in os.walk("C:\\Users\Admin\Desktop\Test"):
     print("in", (len(files)), "files", "\n ")
 
 
-
+isudfiusndc
 
 
 
