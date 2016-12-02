@@ -85,25 +85,66 @@
 #change the function to divide by 1024 at each threshold
 #this will correct the values
 
+# bitesize = int(input("enter bytes"))
+#
+# def filesize(bytesize):
+#
+#     divided = (bytesize / 1020)
+#
+#     if divided < 1024:
+#         return "%.2f" % divided + "Kb"
+#
+#     elif divided <= 1024:
+#         return "%.2f" % divided + "Mb"
+#
+#     elif divided >= 1025 and divided <= 1024000:
+#         return "%.2f" % divided + "Gb"
+#
+#     elif divided >= 1024001 and divided <= 1024000000:
+#         return "%.2f" % divided + "Tb"
+#
+#
+#
+# filesize(bitesize)
+# divided = filesize(bitesize)
+# print (divided)
+
+
+
+"""working function to convert bytes to Kb, Mb, Gb, Tb.
+    this works by taking the byte value, and dependant on size will
+    divide it to resize to the appropriate value to 2 decimal places"""
+
+#replace this input with the value from os.walk
 bitesize = int(input("enter bytes"))
 
 def filesize(bytesize):
 
-    divided = (bytesize / 1020)
+    if bytesize <= 1024:
+        divided = bytesize
+        return str(divided) + " B"
 
-    if divided < 1024:
-        return "%.2f" % divided + "Kb"
+    elif bytesize >= 1025 and bytesize <= 1048576:
+        divided = (bytesize / 1024)
+        return "%.2f" % divided + " Kb"
 
-    elif divided <= 1024:
-        return "%.2f" % divided + "Mb"
+    elif bytesize >= 1048577 and bytesize <= 1073741842:
+        divided1 = (bytesize / 1024)
+        divided = (divided1 / 1024)
+        return "%.2f" % divided + " Mb"
 
-    elif divided >= 1025 and divided <= 1024000:
-        return "%.2f" % divided + "Gb"
+    elif bytesize >= 1073741843 and bytesize <= 1099511600000:
+        divided2 = (bytesize / 1024)
+        divided1 = (divided2 / 1024)
+        divided = (divided1 / 1024)
+        return "%.2f" % divided + " Gb"
 
-    elif divided >= 1024001 and divided <= 1024000000:
-        return "%.2f" % divided + "Tb"
-
-
+    elif bytesize >= 1099511600001 and bytesize <= 1125899800000000:
+        divided3 = (bytesize / 1024)
+        divided2 = (divided3 / 1024)
+        divided1 = (divided2 / 1024)
+        divided = (divided1 / 1024)
+        return "%.2f" % divided + " Tb"
 
 filesize(bitesize)
 divided = filesize(bitesize)
