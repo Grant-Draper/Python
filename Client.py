@@ -1,16 +1,3 @@
-
-#
-#
-#
-# print platform.machine()
-# print platform.version()
-# print platform.platform()
-# print platform.uname()
-# print platform.system()
-# print platform.processor()
-#
-# print "break"
-#
 # #find the version number of any module
 # print platform.__version__
 

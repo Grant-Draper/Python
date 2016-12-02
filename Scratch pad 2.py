@@ -5,7 +5,7 @@
 # from os.path import join, getsize
 #
 # #uses os.walk to scan the selected dir, returns 3 argumennts.
-# for filepath, directorys, files in os.walk("C:\\Users\Admin\Desktop\Test"):
+# for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads"):
 #
 #     #prints the filepath argument
 #     print(filepath,)
@@ -22,54 +22,6 @@
 
 
 
-"""starting to link the filesize conversion to the os.walk function output,
-    to convert the output before presenting to the user"""
-
-import os
-from os.path import join, getsize
-
-#uses os.walk to scan the selected dir, returns 3 argumennts.
-for filepath, directorys, files in os.walk("C:\\Users\Admin\Desktop\Test"):
-
-    #prints the filepath argument
-    print(filepath,)
-
-    """uses os.path.join to append all files in filepath to a single argument called name,
-        os.path.getsize queries using os.stat to return the bytesize value for each segment
-         of the name argument. sum adds the values, which is then assigned the identifier
-         "byte_size" """
-    byte_size = sum([getsize(join(filepath, name)) for name in files])
-    print("consumes", byte_size, "bytes", )
-
-    #the len function then counts all values in the list "files", then prints with byt
-    print("in", (len(files)), "files", "\n ")
-
-
-isudfiusndc
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #lookup psutil for total drive space
 # and statvfs for linux
 
@@ -78,7 +30,7 @@ isudfiusndc
     this works by taking the byte value, and dependant on size will
     divide it to resize to the appropriate value to 2 decimal places"""
 
-# #replace this input with the value from os.walk
+#replace this input with the value from os.walk
 # bitesize = int(input("enter bytes"))
 #
 # def filesize(bytesize):
@@ -112,3 +64,31 @@ isudfiusndc
 # filesize(bitesize)
 # divided = filesize(bitesize)
 # print (divided)
+#
+
+
+"""starting to link the filesize conversion function to the os.walk
+    function output, to convert the output before presenting to the user"""
+
+import os
+from os.path import join, getsize
+
+"""starting to turn os.walk into a function, outputs needed:
+    total bytes from all files. possibly total folders and total files"""
+
+# #def root_info:
+#     #uses os.walk to scan the selected dir, returns 3 argumennts.
+#     for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads"):
+#
+#         #prints the filepath argument
+#         print(filepath,)
+#
+#         """uses os.path.join to append all files in filepath to a single argument called name,
+#             os.path.getsize queries using os.stat to return the bytesize value for each segment
+#             of the name argument. sum adds the values, which is then assigned the identifier
+#             "byte_size" """
+#         byte_size = sum([getsize(join(filepath, name)) for name in files])
+#         print("consumes", (filesize(byte_size)), "bytes", )
+#
+#         #the len function then counts all values in the list "files", then prints with byt
+#         print("in", (len(files)), "files", "\n ")
