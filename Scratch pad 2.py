@@ -81,37 +81,78 @@ def root_info():
     for filepath, directorys, files in os.walk("C:\\Users\grant\Downloads\Test"):
 
         #prints the filepath argument
-        print(filepath,)
+       # print(filepath,)
 
         """uses os.path.join to append all files in filepath to a single argument called name,
             os.path.getsize queries using os.stat to return the byte_size value for each segment
             of the name argument. sum adds the values, which is then assigned the identifier
             "byte_size" """
         byte_size = sum([getsize(join(filepath, name)) for name in files])
-        print("consumes", (filesize(byte_size)), "bytes", )
+       # print("consumes", (filesize(byte_size)), "bytes", )
 
         #the len function then counts all values in the list "files" then prints
-        print("in", (len(files)), "files", "\n ")
+       # print("in", (len(files)), "files", "\n ")
 
 
-        return
-
-        """trying to add in exception handling to silence errors as the required data
-            is partially still outputted, total filesize is not accurate, a number of
-             files are not being read.
-
-             disk image files are not being read and outputted when defined as a function,
-             verified using the test file structure, C:\\Users\grant\Downloads\Test contains
-             4 dirs
-             14 files
-                6 of which are disk image
-             totaling 15.2gb when using this as a function 8 files are found totaling 5.23gb """
-        #except Exception
+    return byte_size
+        #
+        # """trying to add in exception handling to silence errors as the required data
+        #     is partially still outputted, total filesize is not accurate, a number of
+        #      files are not being read.
+        #
+        #      disk image files are not being read and outputted when defined as a function,
+        #      verified using the test file structure, C:\\Users\grant\Downloads\Test contains
+        #      4 dirs
+        #      14 files
+        #         6 of which are disk image
+        #      totaling 15.2gb when using this as a function 8 files are found totaling 5.23gb """
+        # #except Exception
         #pass
 
 root_info()
 
-#fs = root_info(byte_size)
+fs = root_info(byte_size)
+print(fs)
 
 
-## print(fs)
+
+
+#
+# import os
+# from os.path import join, getsize
+# #
+# # def root_info():
+# #uses os.walk to scan the selected dir, returns 3 argumennts.
+# for filepath, directorys, files in os.walk("C:\\Users\grant\Downloads\Test"):
+#
+#     #prints the filepath argument
+#     print(filepath,)
+#
+#     """uses os.path.join to append all files in filepath to a single argument called name,
+#         os.path.getsize queries using os.stat to return the byte_size value for each segment
+#         of the name argument. sum adds the values, which is then assigned the identifier
+#         "byte_size" """
+#     byte_size = sum([getsize(join(filepath, name)) for name in files])
+#     print("consumes", (filesize(byte_size)), "bytes", )
+#
+#         #the len function then counts all values in the list "files" then prints
+#     print("in", (len(files)), "files", "\n ")
+#
+
+        #return
+        #
+        # """trying to add in exception handling to silence errors as the required data
+        #     is partially still outputted, total filesize is not accurate, a number of
+        #      files are not being read.
+        #
+        #      disk image files are not being read and outputted when defined as a function,
+        #      verified using the test file structure, C:\\Users\grant\Downloads\Test contains
+        #      4 dirs
+        #      14 files
+        #         6 of which are disk image
+        #      totaling 15.2gb when using this as a function 8 files are found totaling 5.23gb
+#               when ran not as a function all files are found and calculated correctly"""
+        #except Exception
+        #pass
+
+# root_info()
