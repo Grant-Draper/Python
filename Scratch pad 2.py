@@ -81,17 +81,17 @@ def root_info():
     for filepath, directorys, files in os.walk("C:\\Users\grant\Downloads\Test"):
 
         #prints the filepath argument
-       # print(filepath,)
+        #print(filepath,)
 
         """uses os.path.join to append all files in filepath to a single argument called name,
             os.path.getsize queries using os.stat to return the byte_size value for each segment
             of the name argument. sum adds the values, which is then assigned the identifier
             "byte_size" """
         byte_size = sum([getsize(join(filepath, name)) for name in files])
-       # print("consumes", (filesize(byte_size)), "bytes", )
+        #print("consumes", (filesize(byte_size)), "bytes", )
 
         #the len function then counts all values in the list "files" then prints
-       # print("in", (len(files)), "files", "\n ")
+        #print("in", (len(files)), "files", "\n ")
 
 
     return byte_size
@@ -110,9 +110,10 @@ def root_info():
         #pass
 
 root_info()
-
-fs = root_info(byte_size)
-print(fs)
+print (root_info(byte_size))
+#fs = root_info("byte_size")
+#print(fs)
+#print (root_info(byte_size))
 
 
 
