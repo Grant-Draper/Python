@@ -2,8 +2,40 @@
 # print platform.__version__
 
 import os
-import platform
+import platform, psutil
 from datetime import datetime
+
+
+#Function called Filesize to make human readable the output from bytecount operations.
+
+def filesize(bytesize):
+    if bytesize <= 1024:
+        divided = bytesize
+        return str(divided) + " B"
+
+    elif bytesize >= 1025 and bytesize <= 1048576:
+        divided = (bytesize / 1024)
+        return "%.2f" % divided + " Kb"
+
+    elif bytesize >= 1048577 and bytesize <= 1073741842:
+        divided1 = (bytesize / 1024)
+        divided = (divided1 / 1024)
+        return "%.2f" % divided + " Mb"
+
+    elif bytesize >= 1073741843 and bytesize <= 1099511600000:
+        divided2 = (bytesize / 1024)
+        divided1 = (divided2 / 1024)
+        divided = (divided1 / 1024)
+        return "%.2f" % divided + " Gb"
+
+    elif bytesize >= 1099511600001 and bytesize <= 1125899800000000:
+        divided3 = (bytesize / 1024)
+        divided2 = (divided3 / 1024)
+        divided1 = (divided2 / 1024)
+        divided = (divided1 / 1024)
+        return "%.2f" % divided + " Tb"
+
+
 
 print("Gather system information Y/N")
 start = input()
@@ -12,6 +44,7 @@ start = start.lower()
 if start == "y":
     timestamp = datetime.now()
     platforminfo = platform.uname()
+    usage = psutil.disk_usage("/")
 
     print ("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
     print ("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
@@ -21,6 +54,11 @@ if start == "y":
     print ("Operating system version: %s" % (platforminfo[3]))
     print ("Machine type: %s" % (platforminfo[4]))
     print ("Processor type: %s" % (platforminfo[5]))
+    print (" ")
+    print(" ")
+    print("Root FS, Total Space: ", (filesize(usage[0])))
+    print("Root FS, Used Space: ", (filesize(usage[1])))
+    print("Root FS, Free Space: ", (filesize(usage[2])))
 
     #potential function to identify platform then run os specific file structure commands
     if platforminfo[0].lower() == "windows":
