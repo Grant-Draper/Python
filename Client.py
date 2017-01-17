@@ -70,7 +70,7 @@ if start == "y":
 
 
 elif start == "n":
-    print ("Fine be that way!")
+    print ("Fine! be that way!")
 else:
     print ("Please enter a value in range")
 

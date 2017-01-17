@@ -30,18 +30,59 @@ def filesize(bytesize):
 
 import psutil
 
-print (psutil.disk_partitions())
 
-print ("this is a spacer")
+# print (psutil.disk_partitions())
+#
+# FS = psutil.disk_partitions()
+# print (FS[0])
+# print (FS[1])
+# print (FS[2])
+#
+# print (psutil.disk_usage("/"))
+# print (psutil.disk_usage("C:\\"))
+# print (psutil.disk_usage("F:\\"))
 
-#print (psutil.disk_usage("/"))
+# users = psutil.users()
+# print (users)
+# print (users[0])
+# #print (users[1])
+#print (users[2])
+
+PID = psutil.pids()
+print (PID[1])
+Proc = psutil.Process(PID[1])
+print (Proc)
+print (Proc.name())
+
+#attempting to create a loop that will iterate through every
+#pid outputted from psutil.pids(), getting the process name and info
+
+for i in PID:
+    print (psutil.Process(PID)
+    #print (.name())
+
+else:
+    print("Failed")
 
 
-usage = psutil.disk_usage("/")
-print ("Total Space: ", (filesize(usage[0])))
-print ("Used Space: ", (filesize(usage[1])))
-print ("Free Space: ", (filesize(usage[2])))
 
-# print (filesize(usage[0]))
+# print ("this is a spacer")
+#
+# #print (psutil.disk_usage("/"))
+#
+#
+# usage = psutil.disk_usage("/")
+# print ("Total Space: ", (filesize(usage[0])))
+# print ("Used Space: ", (filesize(usage[1])))
+# print ("Free Space: ", (filesize(usage[2])))
+#
+# # print (filesize(usage[0]))
 # print (filesize(usage[1]))
 # print (filesize(usage[2]))
+
+# print (psutil.net_connections())
+# print (psutil.net_if_addrs())
+#
+# ipaddr = psutil.net_if_addrs()
+#
+# print (ipaddr{1})
