@@ -4,7 +4,7 @@
 import socket
 import select
 
-HOST = ""
+HOST = "127.0.0.1"
 PORT = 30001
 
 master_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -42,11 +42,12 @@ while True:
 
 
 
-
+# #Connection 2
+#
 # import socket
 # import select
 #
-# HOST = "192.168.1.117"
+# HOST = "127.0.0.1"
 # PORT = 30001
 #
 # master_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -60,13 +61,13 @@ while True:
 # sockets.append(master_socket)
 #
 # while True:
-#     (readable, writable, exceptional) = select.select(sockets, sockets, sockets)
+#     (readable, writable, exceptional) = select.select(sockets, [], sockets)
 #
 #     for s in readable:
-#         is s is master_socket:
-#         (client, _) = master_socket.accept()
-#         client.setblocking(0)
-#         sockets.append(client)
+#         if s is master_socket:
+#             (client, _) = master_socket.accept()
+#             client.setblocking(0)
+#             sockets.append(client)
 #
 #     else:
 #         data = s.recv(1024)
@@ -74,11 +75,9 @@ while True:
 #             s.shutdown(socket.SHUT_RDWR)
 #             s.close()
 #             sockets.remove(s)
-#         print("Recieved", repr(data))
-#         elif s in writable:
-#         s.sendall(data)
-#
-#
+#             print("Recieved", repr(data))
+#         else s in writable:
+#             s.sendall(data)
 
 
 
@@ -87,11 +86,13 @@ while True:
 
 
 
-# #server side, working blank, one connection
+
+
+##server side, working blank, one connection
 #
 # import socket
 #
-# HOST = "192.168.1.117"
+# HOST = "127.0.0.1"
 # PORT = 30001
 #
 # server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
