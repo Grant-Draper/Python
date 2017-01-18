@@ -26,6 +26,8 @@ def filesize(bytesize):
         return "%.2f" % divided + " Tb"
 
 
+
+print (filesize(5611654405))
 #testing psutil library
 
 import psutil, pprint
@@ -42,9 +44,9 @@ import psutil, pprint
 # print (psutil.disk_usage("C:\\"))
 # print (psutil.disk_usage("F:\\"))
 
-users = psutil.users()
-print (users)
-print (users[0])
+# users = psutil.users()
+# print (users)
+# print (users[0])
 #print (users[1])
 #print (users[2])
 

@@ -1,8 +1,8 @@
 # #find the version number of any module
 # print platform.__version__
 
-import os
-import platform, psutil, pprint, pwd
+
+import os, platform, psutil, pprint, pwd
 from datetime import datetime
 
 
