@@ -2,7 +2,7 @@
 # print platform.__version__
 
 import os
-import platform, psutil
+import platform, psutil, pprint, pwd
 from datetime import datetime
 
 
@@ -46,6 +46,8 @@ if start == "y":
     platforminfo = platform.uname()
     usage = psutil.disk_usage("/")
 
+
+
     print ("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
     print ("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
     print ("Device network name: %s" % (platforminfo[1]))
@@ -55,10 +57,35 @@ if start == "y":
     print ("Machine type: %s" % (platforminfo[4]))
     print ("Processor type: %s" % (platforminfo[5]))
     print (" ")
-    print(" ")
+    print (" ")
     print("Root FS, Total Space: ", (filesize(usage[0])))
     print("Root FS, Used Space: ", (filesize(usage[1])))
     print("Root FS, Free Space: ", (filesize(usage[2])))
+    print (" ")
+    print (" ")
+    print ("Currently Active User:")
+    print (" ")
+    print (psutil.users())
+    print (" ")
+    print (" ")
+    print ("System Process Table:")
+    print (" ")
+    print(psutil.test())
+    print (" ")
+    print (" ")
+    print ("Network Interfaces:")
+    print (" ")
+    pprint.pprint (psutil.net_if_stats())
+    print (" ")
+    print (" ")
+    print ("Network Interface Address Information: ")
+    print (" ")
+    pprint.pprint(psutil.net_if_addrs())
+    print (" ")
+    print (" ")
+    print ("System Socket Information: ")
+    print (" ")
+    pprint.pprint (psutil.net_connections())
 
     #potential function to identify platform then run os specific file structure commands
     if platforminfo[0].lower() == "windows":
@@ -67,6 +94,7 @@ if start == "y":
         print ("linux")
     elif platforminfo[0].lower() == "unix":
         print ("unix")
+
 
 
 elif start == "n":

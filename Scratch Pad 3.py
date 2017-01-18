@@ -28,7 +28,7 @@ def filesize(bytesize):
 
 #testing psutil library
 
-import psutil
+import psutil, pprint
 
 
 # print (psutil.disk_partitions())
@@ -42,27 +42,40 @@ import psutil
 # print (psutil.disk_usage("C:\\"))
 # print (psutil.disk_usage("F:\\"))
 
-# users = psutil.users()
-# print (users)
-# print (users[0])
-# #print (users[1])
+users = psutil.users()
+print (users)
+print (users[0])
+#print (users[1])
 #print (users[2])
 
-PID = psutil.pids()
-print (PID[1])
-Proc = psutil.Process(PID[1])
-print (Proc)
-print (Proc.name())
 
-#attempting to create a loop that will iterate through every
-#pid outputted from psutil.pids(), getting the process name and info
 
-for i in PID:
-    print (psutil.Process(PID)
-    #print (.name())
 
-else:
-    print("Failed")
+#Proc = psutil.Process(PID[1])
+# print (Proc)
+# print (Proc.name())
+
+#loop that will iterate through every pid outputted from
+#  psutil.pids(), getting the process name and info
+
+# PID = psutil.pids()
+# #pprint.pprint (PID)
+#
+# for i in list(PID):
+#     #print (i)
+#     p = psutil.Process(i)
+#     print (p)
+#     #print (psutil.Process(i))
+#     print(p.status())
+#
+# else:
+#     print(psutil.test())
+#     print("End")
+
+
+
+
+
 
 
 
@@ -86,3 +99,21 @@ else:
 # ipaddr = psutil.net_if_addrs()
 #
 # print (ipaddr{1})
+
+
+
+
+"""looking into creating a while true loop to constantly
+    refresh the usage counters from certain function"""
+
+
+# while True:
+#     print(psutil.test(), end='\r')
+#     break
+
+
+
+#print(psutil.test())
+
+
+
