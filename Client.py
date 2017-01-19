@@ -84,6 +84,12 @@ if start == "y":
 
     print ("Network Interfaces:", "\n ")
     pprint.pprint (psutil.net_if_stats())
+
+
+    for i, i2 in (psutil.net_if_stats()):
+        print (i)
+
+
     print (" ", "\n ", "\n ")
 
 
