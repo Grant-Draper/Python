@@ -19,7 +19,7 @@ from datetime import datetime
 
 #Function called Filesize to make human readable the output from bytecount operations.
 
-def filesize(bytesize):
+def SizeConverter(bytesize):
     if bytesize <= 1024:
         divided = bytesize
         return str(divided) + " B"
@@ -67,22 +67,36 @@ if start == "y":
     print ("Operating system version: %s" % (platforminfo[3]))
     print ("Machine type: %s" % (platforminfo[4]))
     print ("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
-    print("Root FS, Total Space: ", (filesize(usage[0])))
-    print("Root FS, Used Space: ", (filesize(usage[1])))
-    print("Root FS, Free Space: ", (filesize(usage[2])), "\n ", "\n ")
+
+
+    print("Root FS, Total Space: ", (SizeConverter(usage[0])))
+    print("Root FS, Used Space: ", (SizeConverter(usage[1])))
+    print("Root FS, Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
+
+
     print ("Currently Active User:", "\n ")
     print (psutil.users(), "\n ", "\n ")
+
+
     print ("System Process Table:", "\n ")
     print(psutil.test(), "\n ", "\n ")
+
+
     print ("Network Interfaces:", "\n ")
     pprint.pprint (psutil.net_if_stats())
     print (" ", "\n ", "\n ")
+
+
     print ("Network Interface Address Information: ", "\n ")
     pprint.pprint(psutil.net_if_addrs())
     print (" ", "\n ", "\n ")
+
+
     print ("System Socket Information: ", "\n ")
     pprint.pprint (psutil.net_connections())
     print (" ", "\n ", "\n ")
+
+
     print ("Would you like to scan for filesystem directory information? Y/N", "\n ")
     scan = input()
     scan = scan.lower()

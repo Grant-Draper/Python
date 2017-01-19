@@ -60,19 +60,20 @@ import psutil, pprint
 #loop that will iterate through every pid outputted from
 #  psutil.pids(), getting the process name and info
 
-# PID = psutil.pids()
-# #pprint.pprint (PID)
-#
-# for i in list(PID):
-#     #print (i)
-#     p = psutil.Process(i)
-#     print (p)
-#     #print (psutil.Process(i))
-#     print(p.status())
-#
-# else:
-#     print(psutil.test())
-#     print("End")
+PID = psutil.pids()
+#pprint.pprint (PID)
+
+for i in list(PID):
+    #print (i)
+    p = psutil.Process(i)
+    print (p.name())
+    print (p.pid)
+    #print (psutil.Process(i))
+    print(p.status(),'\n')
+
+else:
+    #print(psutil.test())
+    print("End")
 
 
 
