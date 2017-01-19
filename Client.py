@@ -86,8 +86,8 @@ if start == "y":
     pprint.pprint (psutil.net_if_stats())
 
 
-    for i, i2 in (psutil.net_if_stats()):
-        print (i)
+    """for i, i2 in (psutil.net_if_stats()):
+        print (i)"""
 
 
     print (" ", "\n ", "\n ")
