@@ -1,8 +1,19 @@
+
+"""**********************************************************
+            Grant Draper SFC5 - Net Mon Tool (Client)
+                Script Pre-Requisites
+
+                Python 3.6 Interpreter
+                Modules: psutil 5.01
+**********************************************************"""
+
+
+
 # #find the version number of any module
 # print platform.__version__
 
 
-import os, platform, psutil, pprint, pwd
+import os, platform, psutil, pprint
 from datetime import datetime
 
 
@@ -37,7 +48,7 @@ def filesize(bytesize):
 
 
 
-print("Gather system information Y/N")
+print("Capture System Information Y/N")
 start = input()
 start = start.lower()
 
@@ -55,52 +66,49 @@ if start == "y":
     print ("Operating system release: %s" % (platforminfo[2]))
     print ("Operating system version: %s" % (platforminfo[3]))
     print ("Machine type: %s" % (platforminfo[4]))
-    print ("Processor type: %s" % (platforminfo[5]))
-    print (" ")
-    print (" ")
+    print ("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
     print("Root FS, Total Space: ", (filesize(usage[0])))
     print("Root FS, Used Space: ", (filesize(usage[1])))
-    print("Root FS, Free Space: ", (filesize(usage[2])))
-    print (" ")
-    print (" ")
-    print ("Currently Active User:")
-    print (" ")
-    print (psutil.users())
-    print (" ")
-    print (" ")
-    print ("System Process Table:")
-    print (" ")
-    print(psutil.test())
-    print (" ")
-    print (" ")
-    print ("Network Interfaces:")
-    print (" ")
+    print("Root FS, Free Space: ", (filesize(usage[2])), "\n ", "\n ")
+    print ("Currently Active User:", "\n ")
+    print (psutil.users(), "\n ", "\n ")
+    print ("System Process Table:", "\n ")
+    print(psutil.test(), "\n ", "\n ")
+    print ("Network Interfaces:", "\n ")
     pprint.pprint (psutil.net_if_stats())
-    print (" ")
-    print (" ")
-    print ("Network Interface Address Information: ")
-    print (" ")
+    print (" ", "\n ", "\n ")
+    print ("Network Interface Address Information: ", "\n ")
     pprint.pprint(psutil.net_if_addrs())
-    print (" ")
-    print (" ")
-    print ("System Socket Information: ")
-    print (" ")
+    print (" ", "\n ", "\n ")
+    print ("System Socket Information: ", "\n ")
     pprint.pprint (psutil.net_connections())
+    print (" ", "\n ", "\n ")
+    print ("Would you like to scan for filesystem directory information? Y/N", "\n ")
+    scan = input()
+    scan = scan.lower()
+
+    if scan == "y":
+        root_info()
+
+    elif scan == "n":
+        print("FS Scan skipped")
+    else:
+        print("Please enter a value in range")
 
     #potential function to identify platform then run os specific file structure commands
     if platforminfo[0].lower() == "windows":
         print("windows")
     elif platforminfo[0].lower() == "linux":
-        print ("linux")
+        print("linux")
     elif platforminfo[0].lower() == "unix":
-        print ("unix")
+        print("unix")
 
 
 
 elif start == "n":
-    print ("Fine! be that way!")
+    print("Fine! be that way!")
 else:
-    print ("Please enter a value in range")
+    print("Please enter a value in range")
 
 
 

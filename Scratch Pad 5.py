@@ -1,50 +1,34 @@
-# import os
-#
-# print (os.getlogin())
-#
-# pid = os.getpid()
-# print (os.getpgid(pid))
-# print (os.getpgrp(pid))
-
-
-
-
-
 
 import os
 from os.path import join, getsize
 
-
-
 def root_info():
     #uses os.walk to scan the selected dir, returns 3 argumennts.
 
-    count = 0
+    #creats empty totalsize attribute
     totalsize = 0
+
     while True:
          for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
 
-
-            count += 1
-
             #prints the filepath argument
-            print(filepath,)
+            print(filepath[])
+            #print(directorys)
+            #print(files)
 
             """uses os.path.join to append all files in filepath to a single argument called name,
                 os.path.getsize queries using os.stat to return the bytesize value for each segment
                     of the name argument. sum adds the values, which is then assigned the identifier
                         "filesize" """
-            filesize = sum([getsize(join(filepath, name)) for name in files])
-            print("consumes", filesize, "bytes", )
+            #filesize = sum([getsize(join(filepath, name)) for name in files])
+            #print("consumes", filesize, "bytes", )
 
             #the len function then counts all values in the list "files", then prints with byt
-            print("in", (len(files)), "files")
-
-            print(count, "\n ", "\n ")
+            #print("in", (len(files)), "files")
 
             #totalsize.append(filesize)
-            totalsize += filesize
-            print (totalsize)
+            #totalsize += filesize
+            #print (totalsize)
 
 
 
@@ -61,8 +45,8 @@ def root_info():
     need to work out how to append all the values into a concise total
     which can then be passed to filesize() function"""
 
-
+root_info()
 
 #fs = root_info()
 
-print (root_info())
+#print (root_info())
