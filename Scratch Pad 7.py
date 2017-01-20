@@ -39,26 +39,36 @@ def root_info(path):
     totalsize = 0
 
     while True:
+        try:
 
-        for filepath, directorys, files in os.walk(path):
+            for filepath, directorys, files in os.walk(path):
 
-            print(" ")
-            print("Filepath: ", filepath)
-            filesize = sum([getsize(join(filepath, name)) for name in files])
-            print("Total Size of Files:", SizeConverter(filesize))
-            print("Contents:")
+                print(" ")
+                print("Filepath: ", filepath)
+                filesize = sum([getsize(join(filepath, name)) for name in files])
+                print("Total Size of Files:", SizeConverter(filesize))
+                print("Contents:")
 
-            for i in files:
-                print(i)
-            print(" ")
-            print(" ")
-            totalsize += filesize
+                for i in files:
+                    print(i)
+                print(" ")
+                print(" ")
+                totalsize += filesize
 
         #States the directory scanned, need to add in the function to identify disks
         #then pass that to this function to scan the dirs. Also need to add that value
         #to the "Directory Scanned:" comment below.
-        print("Directory Scanned:", )
-        print("Total Size of Directory:", SizeConverter(totalsize))
+
+
+            for i in part:
+
+                print("Directory Scanned:", i.device + "\\")
+                print("Total Size of Directory:", SizeConverter(totalsize))
+
+                break
+
+        except Exception as e:
+            print("Completed with exceptions")
 
         break
 
@@ -87,11 +97,25 @@ part = psutil.disk_partitions()
 
 
 for i in part:
-    print(i.device + "\\")
+    #print(i.device + "\\")
     #mounted.append(i)
-    root_info(i.device + "\\")
+
+
+    #root_info("C:\\Users\Grant\Downloads\Test")
+
+    #root_info("C:\\Users\Grant\Desktop")
+
+    root_info(i.device + "\\Users\Grant\Desktop")
+
+    #root_info(i.device + "\\")
+
+
     try:
-        print(psutil.disk_usage(i.device + "\\"))
+        usage = psutil.disk_usage(i.device + "\\")
+        print("Root FS, Total Space: ", (SizeConverter(usage[0])))
+        print("Root FS, Used Space: ", (SizeConverter(usage[1])))
+        print("Root FS, Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
+
     except Exception as e:
         print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.")
         pass
