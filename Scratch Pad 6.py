@@ -25,6 +25,32 @@ def SizeConverter(bytesize):
         divided = (divided1 / 1024)
         return "%.2f" % divided + " Tb"
 
+import psutil
+
+part = psutil.disk_partitions()
+
+#print (part)
+
+
+usage = psutil.disk_usage("C:\\")
+
+for i in part:
+    print(i.device + "\\")
+    print(psutil.disk_usage(i.device + "\\"))
+    if i.opts == "cdrom":
+
+        break
+
+
+
+
+
+
+
+
+
+
+
 
 
 import os, pprint

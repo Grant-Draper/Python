@@ -56,6 +56,7 @@ if start == "y":
     timestamp = datetime.now()
     platforminfo = platform.uname()
     usage = psutil.disk_usage("/")
+    part = psutil.disk_partitions()
 
 
 
@@ -84,12 +85,6 @@ if start == "y":
 
     print ("Network Interfaces:", "\n ")
     pprint.pprint (psutil.net_if_stats())
-
-
-    """for i, i2 in (psutil.net_if_stats()):
-        print (i)"""
-
-
     print (" ", "\n ", "\n ")
 
 
@@ -103,21 +98,27 @@ if start == "y":
     print (" ", "\n ", "\n ")
 
 
-    print ("Would you like to scan for filesystem directory information? Y/N", "\n ")
-    scan = input()
-    scan = scan.lower()
-
-    if scan == "y":
-        root_info()
-
-    elif scan == "n":
-        print("FS Scan skipped")
-    else:
-        print("Please enter a value in range")
-
-    #potential function to identify platform then run os specific file structure commands
+    #Function to identify platform then run os specific file structure commands
     if platforminfo[0].lower() == "windows":
         print("windows")
+        print("Would you like to scan for filesystem directory information? Y/N", "\n ")
+        scan = input()
+        scan = scan.lower()
+
+        if scan == "y":
+
+
+            for i in part:
+                print(i.device + "\\")
+
+
+        elif scan == "n":
+            print("FS Scan skipped")
+        else:
+            print("Please enter a value in range")
+
+
+
     elif platforminfo[0].lower() == "linux":
         print("linux")
     elif platforminfo[0].lower() == "unix":
