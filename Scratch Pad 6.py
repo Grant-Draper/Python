@@ -25,24 +25,29 @@ def SizeConverter(bytesize):
         divided = (divided1 / 1024)
         return "%.2f" % divided + " Tb"
 
-import psutil
+
+import os, pprint, psutil
+from os.path import join, getsize
+
+
 
 part = psutil.disk_partitions()
 
-#print (part)
+#usage = psutil.disk_usage("C:\\")
 
 
-usage = psutil.disk_usage("C:\\")
+
+
+
+
 
 for i in part:
     print(i.device + "\\")
-    print(psutil.disk_usage(i.device + "\\"))
-    if i.opts == "cdrom":
-
-        break
-
-
-
+    try:
+        print(psutil.disk_usage(i.device + "\\"))
+    except Exception as e:
+        print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.")
+        pass
 
 
 
@@ -50,11 +55,6 @@ for i in part:
 
 
 
-
-
-
-import os, pprint
-from os.path import join, getsize
 
 def root_info():
 
@@ -88,5 +88,4 @@ def root_info():
 
 
 root_info()
-
 
