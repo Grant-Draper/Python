@@ -10,16 +10,19 @@
 
 
 # #find the version number of any module
-# print platform.__version__
+#print platform.__version__
 
 
 import os, platform, psutil, pprint
 from datetime import datetime
 
 
-#Function called Filesize to make human readable the output from bytecount operations.
-
 def SizeConverter(bytesize):
+
+    """Function called SizeConverter to make human readable the output from bytecount operations.
+        Input in Bytes, Output is in the most appropriate formmat, depending on size. E.g.
+        rather than saying 10240 Mb, it will display 10 Gb"""
+
     if bytesize <= 1024:
         divided = bytesize
         return str(divided) + " B"
@@ -48,17 +51,28 @@ def SizeConverter(bytesize):
 
 
 
+"""This asks the user if they are ready to run the capture, only accepts Yy or Nn."""
+
 print("Capture System Information Y/N")
 start = input()
 start = start.lower()
 
+
+
+"""This section checks if the user opted to start the capture, if so creates the variables
+    timestamp, platforminfo and part. These can then be manipulated into a more human
+    readable format in the next section"""
+
 if start == "y":
     timestamp = datetime.now()
     platforminfo = platform.uname()
-    #usage = psutil.disk_usage("/")
+
     part = psutil.disk_partitions()
 
 
+
+    """This section extracts and formats the data gathered from the variables into human readable
+    fields"""
 
     print("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
     print("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
@@ -70,10 +84,18 @@ if start == "y":
     print("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
 
 
+    """Original root file system information gathering section."""
+    #usage = psutil.disk_usage("/")
     #print("Root FS, Total Space: ", (SizeConverter(usage[0])))
     #print("Root FS, Used Space: ", (SizeConverter(usage[1])))
     #print("Root FS, Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
 
+
+    """This loop scans for the drive letters or root mount points of each drive. It then passes
+        the values to a function to find disk usage information, the returned values are then
+        passed through the SizeConverter function. The resultant values are then printed to
+        screen. The whole loop has exception handling, this catches empty drive errors etc, and
+        displays both the original error message and a more human readable message."""
 
     for i in part:
         print(i.device + "\\")
@@ -90,12 +112,15 @@ if start == "y":
             pass
 
 
+
     print ("Currently Active User:", "\n ")
     print (psutil.users(), "\n ", "\n ")
 
 
+
     print ("System Process Table:", "\n ")
     print(psutil.test(), "\n ", "\n ")
+
 
 
     print ("Network Interfaces:", "\n ")
@@ -103,14 +128,17 @@ if start == "y":
     print (" ", "\n ", "\n ")
 
 
+
     print ("Network Interface Address Information: ", "\n ")
     pprint.pprint(psutil.net_if_addrs())
     print (" ", "\n ", "\n ")
 
 
+
     print ("System Socket Information: ", "\n ")
     pprint.pprint (psutil.net_connections())
     print (" ", "\n ", "\n ")
+
 
 
     #Function to identify platform then run os specific file structure commands
