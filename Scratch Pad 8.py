@@ -43,17 +43,21 @@ def root_info(path):
 
             for filepath, directorys, files in os.walk(path):
 
+
+
+
+
                 print(" ")
                 print("Filepath: ", filepath)
                 filesize = sum([getsize(join(filepath, name)) for name in files])
                 print("Total Size of Files:", SizeConverter(filesize))
                 print("Contents:")
 
-                for i in files:
-                    print(i)
-                print(" ")
-                print(" ")
-                totalsize += filesize
+                #for i in files:
+                #    print(i)
+                #print(" ")
+                #print(" ")
+                #totalsize += filesize
 
         #States the directory scanned, need to add in the function to identify disks
         #then pass that to this function to scan the dirs. Also need to add that value
@@ -68,6 +72,7 @@ def root_info(path):
                 break
 
         except Exception as e:
+            print(e)
             print("Completed with exceptions")
 
         break
@@ -123,13 +128,5 @@ for i in part:
 
 #print(mounted)
 #print()
-
-
-
-
-
-
-
-
 
 

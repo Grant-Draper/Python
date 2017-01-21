@@ -55,24 +55,39 @@ start = start.lower()
 if start == "y":
     timestamp = datetime.now()
     platforminfo = platform.uname()
-    usage = psutil.disk_usage("/")
+    #usage = psutil.disk_usage("/")
     part = psutil.disk_partitions()
 
 
 
-    print ("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
-    print ("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
-    print ("Device network name: %s" % (platforminfo[1]))
-    print ("Operating system: %s" % (platforminfo[0]))
-    print ("Operating system release: %s" % (platforminfo[2]))
-    print ("Operating system version: %s" % (platforminfo[3]))
-    print ("Machine type: %s" % (platforminfo[4]))
-    print ("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
+    print("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
+    print("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
+    print("Device network name: %s" % (platforminfo[1]))
+    print("Operating system: %s" % (platforminfo[0]))
+    print("Operating system release: %s" % (platforminfo[2]))
+    print("Operating system version: %s" % (platforminfo[3]))
+    print("Machine type: %s" % (platforminfo[4]))
+    print("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
 
 
-    print("Root FS, Total Space: ", (SizeConverter(usage[0])))
-    print("Root FS, Used Space: ", (SizeConverter(usage[1])))
-    print("Root FS, Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
+    #print("Root FS, Total Space: ", (SizeConverter(usage[0])))
+    #print("Root FS, Used Space: ", (SizeConverter(usage[1])))
+    #print("Root FS, Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
+
+
+    for i in part:
+        print(i.device + "\\")
+
+        try:
+            usage = psutil.disk_usage(i.device + "\\")
+            print("Total Space: ", (SizeConverter(usage[0])))
+            print("Used Space: ", (SizeConverter(usage[1])))
+            print("Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
+
+        except Exception as e:
+            print(e)
+            print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n", "\n")
+            pass
 
 
     print ("Currently Active User:", "\n ")
