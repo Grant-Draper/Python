@@ -14,6 +14,7 @@
 
 
 import os, platform, psutil, pprint
+from os.path import join, getsize
 from datetime import datetime
 
 
@@ -21,7 +22,9 @@ def SizeConverter(bytesize):
 
     """Function called SizeConverter to make human readable the output from bytecount operations.
         Input in Bytes, Output is in the most appropriate formmat, depending on size. E.g.
-        rather than saying 10240 Mb, it will display 10 Gb"""
+        rather than saying 10240 Mb, it will display 10 Gb
+
+        Converts bytes to Kb, Mb, Gb, Tb to 2 decimal places"""
 
     if bytesize <= 1024:
         divided = bytesize
@@ -48,6 +51,53 @@ def SizeConverter(bytesize):
         divided1 = (divided2 / 1024)
         divided = (divided1 / 1024)
         return "%.2f" % divided + " Tb"
+
+
+
+def FileScan(Path):
+
+    """Function called FileScan to read a specified directory 'Path', the function uses
+        os.walk() """
+
+
+    totalsize = 0
+
+    while True:
+
+        # uses os.walk to scan the selected dir, returns 3 argumennts.
+        for filepath, directorys, files in os.walk(Path):
+
+
+            # prints the filepath argument
+            print(" ")
+            print("Filepath: ", filepath)
+
+
+            """uses os.path.join to append all files in filepath to a single argument called name,
+                os.path.getsize queries using os.stat to return the bytesize value for each segment
+                 of the name argument. sum adds the values, which is then assigned the identifier
+                 "filesize" """
+            filesize = sum([getsize(join(filepath, name)) for name in files])
+
+
+            print("Contents:")
+
+            for i in files:
+                print(i)
+            print(" ")
+            totalsize += filesize
+
+            # the len function then counts all values in the list "files", then prints.
+            print("Total number of files:", (len(files)))
+            # t
+            print("Total Size of Files:", SizeConverter(filesize), "\n ", "\n ")
+
+        print("Directory Scanned:", Path)
+        print("Total Size of Directory:", SizeConverter(totalsize))
+
+        break
+
+    return
 
 
 
@@ -143,16 +193,18 @@ if start == "y":
 
     #Function to identify platform then run os specific file structure commands
     if platforminfo[0].lower() == "windows":
-        print("windows")
+        #print("windows")
         print("Would you like to scan for filesystem directory information? Y/N", "\n ")
         scan = input()
         scan = scan.lower()
 
         if scan == "y":
 
+            print("Please type the filepath you would like to scan, Not Case Sensitive. E.g. C:\\\\Users\Admin\Downloads")
+            dir = input()
+            dir = dir.lower()
 
-            for i in part:
-                print(i.device + "\\")
+            FileScan(dir)
 
 
         elif scan == "n":

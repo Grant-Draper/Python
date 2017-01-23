@@ -13,20 +13,21 @@ def root_info():
     #dir = []
 
     while True:
-         for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
+         #for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
+         for filepath, directorys, files in os.walk("C:\\Users\Admins\Downloads"):
 
             #prints the filepath argument
-            #print(filepath)
+            print(filepath)
             #print(filepath[:])
-            """print(directorys)
+            print(directorys)
             print(directorys[0:0])
             print(directorys[0:1])
             print(directorys[0:2])
-            print(directorys[0:3])"""
-            #print(files)
+            print(directorys[0:3])
+            print(files)
             #print(files[:])
             #print(files[0:((len(files)))])
-            #print(os.walk("C:\\Users\Grant\Downloads\Test"))
+            print(os.walk("C:\\Users\Admins\Downloads"))
 
             """uses os.path.join to append all files in filepath to a single argument called name,
                 os.path.getsize queries using os.stat to return the bytesize value for each segment
@@ -43,12 +44,15 @@ def root_info():
             #print (totalsize)
 
 
-
+         #return
          break
 
-    return files, totalsize
+    return #files, #totalsize
 
-files, totalsize = root_info()
+fs = root_info()
+print(fs)
+
+#files, totalsize = root_info()
 
 
 """this function works, it finds the total of the files in the directory
@@ -58,7 +62,7 @@ files, totalsize = root_info()
     need to work out how to append all the values into a concise total
     which can then be passed to filesize() function"""
 
-print(files)
+#print(files)
 
 #print()
 #fs = root_info()

@@ -22,8 +22,8 @@ def root_info():
     count = 0
     totalsize = 0
     while True:
-         for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
-
+         #for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
+         for filepath, directorys, files in os.walk("C:\\Users\Admin\Downloads"):
 
             count += 1
 

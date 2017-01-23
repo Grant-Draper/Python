@@ -56,13 +56,16 @@ for i in part:
 
 
 
-def root_info():
+#def root_info():
+def root_info(path):
 
     totalsize = 0
 
     while True:
 
-        for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
+        #for filepath, directorys, files in os.walk("C:\\Users\Grant\Downloads\Test"):
+        #for filepath, directorys, files in os.walk("C:\\Users\Admin\Downloads"):
+        for filepath, directorys, files in os.walk(path):
 
             print(" ")
             print("Filepath: ", filepath)
@@ -87,5 +90,5 @@ def root_info():
     return #files, totalsize
 
 
-root_info()
+root_info("C:\\Users\Admin\Downloads")
 
