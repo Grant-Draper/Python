@@ -26,42 +26,46 @@ if __name__ == "__main__":
 
 #server side, multiple connections
 
-# import socket
-# import select
-#
-# HOST = "127.0.0.1"
-# PORT = 30001
-#
-# master_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# master_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-# master_socket.setblocking(0)
-# master_socket.bind((HOST, PORT))
-# master_socket.listen(1)
-#
-# #creates a storage area for our connections
-# sockets = []
-# sockets.append(master_socket)
-# print("about to loop")
-# while True:
-#     (readable, writable, exceptional) = select.select(sockets, [], sockets)
-#     #print(readable)
-#     for s in readable:
-#         if s is master_socket:
-#             (client, _) = master_socket.accept()
-#             client.setblocking(0)
-#             sockets.append(client)
-#         else:
-#             data = s.recv(1024)
-#
-#             if not data:
-#                 s.shutdown(socket.SHUT_RDWR)
-#                 s.close()
-#                 sockets.remove(s)
-#             else:
-#                 s.sendall(data)
-#             #print ("Recieved", repr(data))
-#
-#
+import socket
+import select
+
+HOST = "127.0.0.1"
+PORT = 30001
+
+master_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+master_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+master_socket.setblocking(0)
+master_socket.bind((HOST, PORT))
+master_socket.listen(1)
+
+#creates a storage area for our connections
+sockets = []
+sockets.append(master_socket)
+print("about to loop")
+while True:
+    (readable, writable, exceptional) = select.select(sockets, [], sockets)
+    #print(readable)
+    for s in readable:
+        if s is master_socket:
+            (client, _) = master_socket.accept()
+
+
+            client.setblocking(0)
+
+
+            sockets.append(client)
+        else:
+            data = s.recv(1024)
+
+            if not data:
+                s.shutdown(socket.SHUT_RDWR)
+                s.close()
+                sockets.remove(s)
+            else:
+                s.sendall(data)
+            #print ("Recieved", repr(data))
+
+
 
 
 

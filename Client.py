@@ -13,9 +13,28 @@
 #print platform.__version__
 
 
-import os, platform, psutil, pprint
+import os, platform, psutil, pprint, socket, ssl
 from os.path import join, getsize
 from datetime import datetime
+
+
+"""starting to try and implement sockets"""
+"""
+def openConnection():
+    master_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    master_socket.bind(('', 7075))
+    master_socket.listen(1)
+    return master_socket
+
+if __name__ = "__main__":
+    s = OpenConnection()
+    newsock, newaddr = s.accept()
+    ssl_socket
+"""
+
+
+
+
 
 
 def SizeConverter(bytesize):
@@ -54,18 +73,26 @@ def SizeConverter(bytesize):
 
 
 
-def FileScan(Path):
+def FileScan(path):
 
     """Function called FileScan to read a specified directory 'Path', the function uses
-        os.walk() """
+        os.walk() to walk through filepaths, directorys and files. Prints all values for
+        each directory and its contents.
+
+        This function also finds the total size of the files in each directory it scans.
+        The function will also find the total size consumed by the scans root directory
+        (where the scan started)
+
+        This function can take some time to run depending on the complexity of the
+        file structure."""
 
 
     totalsize = 0
 
     while True:
 
-        # uses os.walk to scan the selected dir, returns 3 argumennts.
-        for filepath, directorys, files in os.walk(Path):
+        # uses os.walk to scan the selected dir, returns 3 arguments.
+        for filepath, directorys, files in os.walk(path):
 
 
             # prints the filepath argument
@@ -80,19 +107,27 @@ def FileScan(Path):
             filesize = sum([getsize(join(filepath, name)) for name in files])
 
 
+            # for loop to print everything in the 'files' item
             print("Contents:")
-
             for i in files:
                 print(i)
             print(" ")
-            totalsize += filesize
+
 
             # the len function then counts all values in the list "files", then prints.
             print("Total number of files:", (len(files)))
-            # t
+
+
+            # takes the 'filesize' bytecount and passes it through the 'SizeConverter' function.
             print("Total Size of Files:", SizeConverter(filesize), "\n ", "\n ")
 
-        print("Directory Scanned:", Path)
+
+            #takes the 'filesize' bytecount and adds it to the variable 'totalsize'
+            totalsize += filesize
+
+
+        # prints the originally specified path and the 'totalsize' value after 'SizeConverter'.
+        print("Directory Scanned:", path)
         print("Total Size of Directory:", SizeConverter(totalsize))
 
         break
@@ -102,7 +137,6 @@ def FileScan(Path):
 
 
 """This asks the user if they are ready to run the capture, only accepts Yy or Nn."""
-
 print("Capture System Information Y/N")
 start = input()
 start = start.lower()
@@ -112,18 +146,15 @@ start = start.lower()
 """This section checks if the user opted to start the capture, if so creates the variables
     timestamp, platforminfo and part. These can then be manipulated into a more human
     readable format in the next section"""
-
 if start == "y":
     timestamp = datetime.now()
     platforminfo = platform.uname()
-
     part = psutil.disk_partitions()
 
 
 
     """This section extracts and formats the data gathered from the variables into human readable
     fields"""
-
     print("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
     print("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
     print("Device network name: %s" % (platforminfo[1]))
@@ -134,6 +165,7 @@ if start == "y":
     print("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
 
 
+
     """Original root file system information gathering section."""
     #usage = psutil.disk_usage("/")
     #print("Root FS, Total Space: ", (SizeConverter(usage[0])))
@@ -141,12 +173,13 @@ if start == "y":
     #print("Root FS, Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
 
 
+
     """This loop scans for the drive letters or root mount points of each drive. It then passes
         the values to a function to find disk usage information, the returned values are then
         passed through the SizeConverter function. The resultant values are then printed to
         screen. The whole loop has exception handling, this catches empty drive errors etc, and
         displays both the original error message and a more human readable message."""
-
+    print("Mounted drives and Usage:", "\n ")
     for i in part:
         print(i.device + "\\")
 
@@ -154,15 +187,16 @@ if start == "y":
             usage = psutil.disk_usage(i.device + "\\")
             print("Total Space: ", (SizeConverter(usage[0])))
             print("Used Space: ", (SizeConverter(usage[1])))
-            print("Free Space: ", (SizeConverter(usage[2])), "\n ", "\n ")
+            print("Free Space: ", (SizeConverter(usage[2])), "\n ")
 
         except Exception as e:
             print(e)
-            print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n", "\n")
+            print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n")
             pass
 
 
 
+    print(" ")
     print ("Currently Active User:", "\n ")
     print (psutil.users(), "\n ", "\n ")
 
@@ -200,7 +234,9 @@ if start == "y":
 
         if scan == "y":
 
-            print("Please type the filepath you would like to scan, Not Case Sensitive. E.g. C:\\\\Users\Admin\Downloads")
+            print("Please type the filepath you would like to scan, Not Case Sensitive. ")
+            print("This function can take some time to run depending on the complexity of the file structure ")
+            print("E.g. C:\\\\Users\Admin\Downloads")
             dir = input()
             dir = dir.lower()
 
