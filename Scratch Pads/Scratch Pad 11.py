@@ -17,32 +17,7 @@ import os, platform, psutil, pprint, socket, ssl, json
 from os.path import join, getsize
 from datetime import datetime
 
-def OpenClientConnection(outgoing_data):
 
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ssl_socket = ssl.wrap_socket(s, ca_certs="server.crt", cert_reqs=ssl.CERT_REQUIRED)
-        ssl_socket.connect(("localhost", 30000))
-
-        # encodes the outgoing data in UTF-8 and writes it to the socket
-        print(outgoing_data)
-        ssl_socket.write(outgoing_data.encode("UTF-8"))
-
-        # reads data from the socket and assigns it to a local variable
-        incoming_data = ssl_socket.read()
-
-        # decodes the variable from UTF-8 and prints
-        print(incoming_data.decode("UTF-8"))
-
-        # closes the connection
-        ssl_socket.close()
-
-    except Exception as e:
-        print(e)
-        print("Completed with Exception.", "\n")
-        pass
-
-    return
 
 #OpenClientConnection("Test Information")
 
@@ -99,6 +74,7 @@ def FileScan(path):
     totalsize = 0
     filelist = []
     sizes = []
+
     while True:
 
         # uses os.walk to scan the selected dir, returns 3 arguments.
@@ -119,18 +95,20 @@ def FileScan(path):
 
             #print("Test 1", data)
             #print(data)
+            #numfiles = json.dumps(len(files))
             numfiles = (len(files))
-
             #print("Total Size of Files:", SizeConverter(filesize), "\n ", "\n ")
 
             totalsize += filesize
-
+            JSONData = json.dumps((SizeConverter(totalsize), filelist, sizes, numfiles, path))
 
         # prints the originally specified path and the 'totalsize' value after 'SizeConverter'.
         #print("Directory Scanned:", path)
         #print("Total Size of Directory:", SizeConverter(totalsize))
         break
-    return SizeConverter(totalsize), filelist, sizes, numfiles, path
+
+    #return numfiles
+    return JSONData
     #print(FileScan.data)
     #print(data)
             #return data, SizeConverter(filesize)
@@ -140,13 +118,73 @@ def FileScan(path):
 
 
 result = FileScan("c:\\users\\admin\\downloads")
-print(result)
+#print(result)
 
-JSONData = json.dumps(result)
+#JSONData = json.dumps(result)
 
-OpenClientConnection(JSONData)
+
 
 #FileScan("c:\\users\\admin\\downloads")
+
+
+
+
+
+def OpenClientConnection(outgoing_data):
+
+    try:
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        ssl_socket = ssl.wrap_socket(s, ca_certs="server.crt", cert_reqs=ssl.CERT_REQUIRED)
+        ssl_socket.connect(("localhost", 30000))
+
+    except Exception as e:
+        print(e)
+        print("Completed with Exception1.", "\n")
+        pass
+
+    try:
+        # encodes the outgoing data in UTF-8 and writes it to the socket
+        #print(outgoing_data)
+        ssl_socket.write(outgoing_data.encode("UTF-8"))
+
+        # reads data from the socket and assigns it to a local variable
+        incoming_data = ssl_socket.read()
+
+        # decodes the variable from UTF-8 and prints
+        print(incoming_data.decode("UTF-8"))
+
+        # closes the connection
+        ssl_socket.close()
+
+    except Exception as e:
+        print(e)
+        print("Completed with Exception2.", "\n")
+        pass
+        return
+
+
+#OpenClientConnection(FileScan("c:\\users\\admin\\downloads"))
+OpenClientConnection(result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 """This asks the user if they are ready to run the capture, only accepts Yy or Nn."""

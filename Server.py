@@ -34,6 +34,11 @@ if __name__ == "__main__":
 
     python_data = json.loads(decoded_data)
     print(python_data)
+    print(python_data[0])
+    print(python_data[1])
+    for i in (python_data[1]):
+        print(i)
+
 
 
     #assigns a variable an ACK message
@@ -44,3 +49,4 @@ if __name__ == "__main__":
 
     #closes the connection
     ssl_socket.close()
+
