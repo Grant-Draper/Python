@@ -96,54 +96,43 @@ def FileScan(path):
         This function can take some time to run depending on the complexity of the
         file structure."""
 
-    totalsize = 0
-    #data = None
+    totalsize = []
+    data = []
+
     while True:
 
         # uses os.walk to scan the selected dir, returns 3 arguments.
         for filepath, directorys, files in os.walk(path):
 
 
-            # prints the filepath argument
-            print(" ")
             #data = " "
-            print("Filepath: ", filepath)
+
             #data += "Filepath: " + filepath
 
-
-            """uses os.path.join to append all files in filepath to a single argument called name,
-                os.path.getsize queries using os.stat to return the bytesize value for each segment
-                 of the name argument. sum adds the values, which is then assigned the identifier
-                 "filesize" """
             #filesize = sum([getsize(join(filepath, name)) for name in files])
-            filesize = sum([getsize(join(filepath, name)) for name in files])
-
-            # for loop to print everything in the 'files' item
-            print("Contents:")
-            for i in files:
-                print(i)
-            print(" ")
+            #data += sum([getsize(join(filepath, name)) for name in files])
 
 
-            # the len function then counts all values in the list "files", then prints.
-            print("Total number of files:", (len(files)))
+            #print("Contents:")
+            #for file in files:
+                #data = file
+                #print(file)
+            #print(" ")
+
+            #print("Total number of files:", (len(files)))
+
+            #print("Total Size of Files:", SizeConverter(filesize), "\n ", "\n ")
+
+            totalsize += data
 
 
-            # takes the 'filesize' bytecount and passes it through the 'SizeConverter' function.
-            print("Total Size of Files:", SizeConverter(filesize), "\n ", "\n ")
 
+        #print("Directory Scanned:", path)
+        #print("Total Size of Directory:", SizeConverter(totalsize))
 
-            #takes the 'filesize' bytecount and adds it to the variable 'totalsize'
-            totalsize += filesize
+            #break
 
-
-        # prints the originally specified path and the 'totalsize' value after 'SizeConverter'.
-        print("Directory Scanned:", path)
-        print("Total Size of Directory:", SizeConverter(totalsize))
-
-        break
-    #print(data)
-    return #data
+            return data, filesize, SizeConverter(filesize), len(files), SizeConverter(totalsize), filepath, files, path
 
 
 OpenClientConnection(FileScan("c:\\users\\admin\\downloads"))
