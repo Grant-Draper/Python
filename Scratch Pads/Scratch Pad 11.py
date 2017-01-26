@@ -9,17 +9,11 @@
 
 
 
-# #find the version number of any module
-#print platform.__version__
-
 
 import os, platform, psutil, pprint, socket, ssl, json
 from os.path import join, getsize
 from datetime import datetime
 
-
-
-#OpenClientConnection("Test Information")
 
 
 def SizeConverter(bytesize):
@@ -80,6 +74,8 @@ def FileScan(path):
         # uses os.walk to scan the selected dir, returns 3 arguments.
         for filepath, directorys, files in os.walk(path):
 
+            fn = "FileScan"
+            host = ""
 
             #data += "Filepath: " + filepath
 
@@ -100,7 +96,7 @@ def FileScan(path):
             #print("Total Size of Files:", SizeConverter(filesize), "\n ", "\n ")
 
             totalsize += filesize
-            JSONData = json.dumps((SizeConverter(totalsize), filelist, sizes, numfiles, path))
+            JSONData = json.dumps((fn, host, path, filelist, numfiles, sizes, SizeConverter(totalsize), filepath))
 
         # prints the originally specified path and the 'totalsize' value after 'SizeConverter'.
         #print("Directory Scanned:", path)
