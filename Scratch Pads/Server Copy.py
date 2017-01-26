@@ -6,7 +6,7 @@
                 Modules: psutil 5.01
 **********************************************************"""
 
-import socket, ssl, json, select
+import socket, ssl, json, select, pprint
 
 """starting to try and implement sockets"""
 
@@ -106,14 +106,14 @@ def Listening():
                         print("Machine type:                 ", items[4])
                         print("Processor type:               ", items[5], "\n ", "\n ")
 
-                    # elif python_data[0] == "Partitions":
-                    #     print(python_data[0])
-                    #     print(python_data[1])
-                    #
-                    #     items = []
-                    #     for i in python_data[2]:
-                    #         items.append(i)
-                    #     print(items)
+                    elif python_data[0] == "Partitions":
+                        print(python_data[0])
+                        print(python_data[1])
+
+                        items = []
+                        for i in python_data[2]:
+                            items.append(i)
+                        print(items)
 
                     elif python_data[0] == "PartUsage":
                         #print(python_data)
@@ -128,25 +128,39 @@ def Listening():
                             usage.append(i)
 
                         for i in part:
-                            print(i[0])
+                            print(i[0], "\\")
+
                             print("Total Space: ", usage[0])
-                            print("Used Space:  ", usage[0])
-                            print("Free Space:  ", usage[0])
-
-
-
-
-
-
+                            print("Used Space:  ", usage[1])
+                            print("Free Space:  ", usage[2])
 
                         print(part)
                         print(usage)
-                        #print("Total Space: ", (SizeConverter(items[0])))
-                        #print("Used Space: ", (SizeConverter(items[1])))
-                        #print("Free Space: ", (SizeConverter(items[2])), "\n ")
 
+                    elif python_data[0] == "User":
+                        print(python_data[0])
+                        print(python_data[1])
+                        print(python_data)
 
+                    elif python_data[0] == "PSTable":
+                        print(python_data[0])
+                        print(python_data[1])
+                        print(python_data)
 
+                    elif python_data[0] == "NICs":
+                        print(python_data[0])
+                        print(python_data[1])
+                        pprint.pprint(python_data)
+
+                    elif python_data[0] == "NICAddr":
+                        print(python_data[0])
+                        print(python_data[1])
+                        print(python_data)
+
+                    elif python_data[0] == "Sockets":
+                        print(python_data[0])
+                        print(python_data[1])
+                        print(python_data)
 
                     elif python_data[0] == "FileScan":
                         FileScan(python_data)

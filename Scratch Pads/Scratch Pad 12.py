@@ -162,38 +162,99 @@ def Partitions():
     JSONData = json.dumps((fn, host, part))
     return JSONData
 
+def User():
+    fn = "User"
+    host = ""
+    user = psutil.users()
+    JSONData = json.dumps((fn, host, user))
+    return JSONData
+
+def PSTable():
+    fn = "PSTable"
+    host = ""
+    pstable = psutil.test()
+    JSONData = json.dumps((fn, host, pstable))
+    return JSONData
+
+def NICs():
+    fn = "NICs"
+    host = ""
+    nics = psutil.net_if_stats()
+    JSONData = json.dumps((fn, host, nics))
+    return JSONData
+
+def NICAddr():
+    fn = "NICAddr"
+    host = ""
+    nicaddr = psutil.net_if_addrs()
+    JSONData = json.dumps((fn, host, nicaddr))
+    return JSONData
+
+def Sockets():
+    fn = "Sockets"
+    host = ""
+    sockets = psutil.net_connections()
+    JSONData = json.dumps((fn, host, sockets))
+    return JSONData
+
+
+
+
 def PartUsage():
     fn = "PartUsage"
     host = ""
     part = psutil.disk_partitions()
-    usage = []
+    null = []
+    usage = {}
+
     for i in part:
         print(i.device + "\\")
 
         try:
-            usage = psutil.disk_usage(i.device + "\\")
+            null = psutil.disk_usage(i.device + "\\")
+            for i in null:
+                if key in usage:
+                    usage[key1].append(SizeConverter(i))
+                else:
+                    usage[key1] = (SizeConverter(i)
+
+                # part = {i.device: (SizeConverter(i)  }
+                # usage.append(part)
+                # SizeConverter(i)
+                #
+                # for i in usage:
+                #     usage = SizeConverter(i)
 
         except Exception as e:
             print(e)
             print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n")
             pass
+        print(usage[0])
+        # usage[0] = SizeConverter(usage[0])
+        # usage[1] = SizeConverter(usage[1])
+        # usage[2] = SizeConverter(usage[2])
 
-        usage[0] = SizeConverter(usage[0])
-        usage[1] = SizeConverter(usage[1])
-        usage[2] = SizeConverter(usage[2])
-
-        JSONData = json.dumps((fn, host, part, usage, str(e)))
+        JSONData = json.dumps((fn, host, part, usage))
     return JSONData
 
 
 
 
 
-OpenClientConnection(FileScan("c:\\users\\admin\\downloads"))
+
+#OpenClientConnection(FileScan("f:\\video"))
+#OpenClientConnection(FileScan("c:\\users\\admin\\downloads"))
 OpenClientConnection(TimeStamp())
 OpenClientConnection(PlatformInfo())
-OpenClientConnection(Partitions())
-OpenClientConnection(PartUsage())
+#OpenClientConnection(Partitions())
+#OpenClientConnection(PartUsage())
+OpenClientConnection(User())
+#OpenClientConnection(PSTable())
+OpenClientConnection(NICs())
+#OpenClientConnection(NICAddr())
+#OpenClientConnection(Sockets())
+
+
 
 #print("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
 # print("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
