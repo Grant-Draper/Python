@@ -15,10 +15,6 @@ from datetime import datetime
 def FileScan(python_data):
     while True:
         while True:
-            # Identifier Options
-            print(python_data[0], "Information Received")
-            print("From host: ", python_data[1])
-
             print("Filepath:", python_data[7])
             for s in (python_data[5]):
                 print("Directory has", python_data[4], "files, which consume", s)
@@ -31,21 +27,10 @@ def FileScan(python_data):
             break
         print("Directory Scanned:", python_data[2])
         print("Total Size of Directory:", python_data[6])
+        print("\n", "----------------------------------------------------------------", "\n")
+
         break
     return
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -150,43 +135,6 @@ def Listening():
                                 pass
                         print("\n", "----------------------------------------------------------------", "\n")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        #
-                        # part = []
-                        # usage = []
-                        # for i in python_data[2]:
-                        #     part.append(i)
-                        # for i in python_data[3]:
-                        #     usage.append(i)
-                        #
-                        # for i in part:
-                        #     print(i[0], "\\")
-                        #     # pprint.pprint(python_data(2))
-                        #     # print("Total Space: ", usage[0])
-                        #     # print("Used Space:  ", usage[1])
-                        #     # print("Free Space:  ", usage[2])
-                        #
-                        # print(part)
-                        # print(usage)
-                        # print("\n", "----------------------------------------------------------------", "\n")
-
                     elif python_data[0] == "User":
                         print(python_data[0], "Function Information Received")
                         ts = datetime.now()
@@ -244,13 +192,6 @@ def Listening():
 
 Listening()
 
-
-    # print("Device network name: %s" % (python_data[1]))
-    # print("Operating system: %s" % (python_data[0]))
-    # print("Operating system release: %s" % (python_data[2]))
-    # print("Operating system version: %s" % (python_data[3]))
-    # print("Machine type: %s" % (python_data[4]))
-    # print("Processor type: %s" % (python_data[5]), "\n ", "\n ")
 
 
 

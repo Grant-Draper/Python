@@ -92,11 +92,6 @@ def FileScan(path):
 
 
 
-#result = FileScan("c:\\users\\admin\\downloads")
-
-
-
-
 
 Host = "127.0.0.1"
 Port = 30000
@@ -221,61 +216,8 @@ def PartUsage():
 
 
 
-# def PartUsage():
-#     fn = "PartUsage"
-#     host = Host
-#     part = psutil.disk_partitions()
-#     null = []
-#     usage = {}
-#
-#     #
-#     # hdd = []
-#     # hdd.append(part[0][0], part[0][1], part[0][2])
-#
-#     for i in part:
-#         print(i.device + "\\")
-#         usage.update(i.device + "\\")
-#         print (usage.keys())
-#
-#         try:
-#             null = psutil.disk_usage(i.device + "\\")
-#
-#             for i in null:
-#
-#                 if (i.device + "\\") in usage:
-#                     usage[i.device + "\\"].append(SizeConverter(i))
-#                     print(usage)
-#                 else:
-#                     usage[i.device] = (SizeConverter(i))
-#                     print(usage)
-#                 print(usage)
-#
-#                 # part = {i.device: (SizeConverter(i)  }
-#                 # usage.append(part)
-#                 # SizeConverter(i)
-#                 #
-#                 # for i in usage:
-#                 #     usage = SizeConverter(i)
-#
-#         except Exception as e:
-#             print(e)
-#             print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n")
-#             pass
-#         #print(usage[0])
-#         # usage[0] = SizeConverter(usage[0])
-#         # usage[1] = SizeConverter(usage[1])
-#         # usage[2] = SizeConverter(usage[2])
-#
-#         JSONData = json.dumps((fn, host, part, usage), ensure_ascii=False)
-#     return JSONData
-
-
-
-
-
-
 #OpenClientConnection(FileScan("f:\\video"))
-#OpenClientConnection(FileScan("c:\\users\\admin\\downloads"))
+OpenClientConnection(FileScan("c:\\users\\admin\\downloads"))
 OpenClientConnection(TimeStamp())
 OpenClientConnection(PlatformInfo())
 #OpenClientConnection(Partitions())
@@ -288,12 +230,4 @@ OpenClientConnection(NICs())
 
 
 
-#print("Sys info capture time: %s:%s" % (timestamp.hour, timestamp.minute))
-# print("Sys info capture date: %s/%s/%s" % (timestamp.day, timestamp.month, timestamp.year))
-# print("Device network name: %s" % (platforminfo[1]))
-# print("Operating system: %s" % (platforminfo[0]))
-# print("Operating system release: %s" % (platforminfo[2]))
-# print("Operating system version: %s" % (platforminfo[3]))
-# print("Machine type: %s" % (platforminfo[4]))
-# print("Processor type: %s" % (platforminfo[5]), "\n ", "\n ")
 

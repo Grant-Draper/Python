@@ -139,3 +139,78 @@ for key in test:
 
 #print(psutil.disk_usage())
 
+
+
+
+
+def FileScan(path):
+
+    totalsize = 0
+    filelist = []
+    sizes = []
+
+    while True:
+
+        for filepath, directorys, files in os.walk(path):
+
+            fn = "FileScan"
+            host = Host
+            filesize = sum([getsize(join(filepath, name)) for name in files])
+            for i in files:
+                filelist.append(i)
+            sizes.append(SizeConverter(filesize))
+            numfiles = (len(files))
+            totalsize += filesize
+
+            JSONData = json.dumps((fn, host, path, filelist, numfiles, sizes, SizeConverter(totalsize), filepath))
+        break
+    return JSONData
+
+
+# def PartUsage():
+#     fn = "PartUsage"
+#     host = Host
+#     part = psutil.disk_partitions()
+#     null = []
+#     usage = {}
+#
+#     #
+#     # hdd = []
+#     # hdd.append(part[0][0], part[0][1], part[0][2])
+#
+#     for i in part:
+#         print(i.device + "\\")
+#         usage.update(i.device + "\\")
+#         print (usage.keys())
+#
+#         try:
+#             null = psutil.disk_usage(i.device + "\\")
+#
+#             for i in null:
+#
+#                 if (i.device + "\\") in usage:
+#                     usage[i.device + "\\"].append(SizeConverter(i))
+#                     print(usage)
+#                 else:
+#                     usage[i.device] = (SizeConverter(i))
+#                     print(usage)
+#                 print(usage)
+#
+#                 # part = {i.device: (SizeConverter(i)  }
+#                 # usage.append(part)
+#                 # SizeConverter(i)
+#                 #
+#                 # for i in usage:
+#                 #     usage = SizeConverter(i)
+#
+#         except Exception as e:
+#             print(e)
+#             print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n")
+#             pass
+#         #print(usage[0])
+#         # usage[0] = SizeConverter(usage[0])
+#         # usage[1] = SizeConverter(usage[1])
+#         # usage[2] = SizeConverter(usage[2])
+#
+#         JSONData = json.dumps((fn, host, part, usage), ensure_ascii=False)
+#     return JSONData
