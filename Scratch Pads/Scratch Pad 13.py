@@ -98,7 +98,7 @@ def FileScan(path):
 
 
 
-Host = "localhost"
+Host = "127.0.0.1"
 Port = 30000
 
 
@@ -198,49 +198,76 @@ def Sockets():
     JSONData = json.dumps((fn, host, sockets))
     return JSONData
 
-
-
-
 def PartUsage():
     fn = "PartUsage"
     host = Host
+    test = {}
     part = psutil.disk_partitions()
-    null = []
-    usage = {}
-
-    #
-    # hdd = []
-    # hdd.append(part[0][0], part[0][1], part[0][2])
-
     for i in part:
-        print(i.device + "\\")
 
         try:
-            null = psutil.disk_usage(i.device + "\\")
-            for i in null:
-                if i.device in usage:
-                    usage[i.device].append(SizeConverter(i))
-                else:
-                    usage[i.device] = (SizeConverter(i))
-
-                # part = {i.device: (SizeConverter(i)  }
-                # usage.append(part)
-                # SizeConverter(i)
-                #
-                # for i in usage:
-                #     usage = SizeConverter(i)
+            usage = psutil.disk_usage(i.device + "\\")
+            for u in usage:
+                test[i.device] = (SizeConverter(usage[0])), (SizeConverter(usage[1])), (SizeConverter(usage[2]))
 
         except Exception as e:
             print(e)
             print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n")
+            test[i.device] = ("exception"), ("Drive unable to be scanned. Usually empty CDROM or Floppy drive")
             pass
-        #print(usage[0])
-        # usage[0] = SizeConverter(usage[0])
-        # usage[1] = SizeConverter(usage[1])
-        # usage[2] = SizeConverter(usage[2])
 
-        JSONData = json.dumps((fn, host, part, usage), ensure_ascii=False)
+    JSONData = json.dumps((fn, host, test))
     return JSONData
+
+
+
+# def PartUsage():
+#     fn = "PartUsage"
+#     host = Host
+#     part = psutil.disk_partitions()
+#     null = []
+#     usage = {}
+#
+#     #
+#     # hdd = []
+#     # hdd.append(part[0][0], part[0][1], part[0][2])
+#
+#     for i in part:
+#         print(i.device + "\\")
+#         usage.update(i.device + "\\")
+#         print (usage.keys())
+#
+#         try:
+#             null = psutil.disk_usage(i.device + "\\")
+#
+#             for i in null:
+#
+#                 if (i.device + "\\") in usage:
+#                     usage[i.device + "\\"].append(SizeConverter(i))
+#                     print(usage)
+#                 else:
+#                     usage[i.device] = (SizeConverter(i))
+#                     print(usage)
+#                 print(usage)
+#
+#                 # part = {i.device: (SizeConverter(i)  }
+#                 # usage.append(part)
+#                 # SizeConverter(i)
+#                 #
+#                 # for i in usage:
+#                 #     usage = SizeConverter(i)
+#
+#         except Exception as e:
+#             print(e)
+#             print("Drive unable to be scanned. Usually empty CDROM or Floppy drive.", "\n")
+#             pass
+#         #print(usage[0])
+#         # usage[0] = SizeConverter(usage[0])
+#         # usage[1] = SizeConverter(usage[1])
+#         # usage[2] = SizeConverter(usage[2])
+#
+#         JSONData = json.dumps((fn, host, part, usage), ensure_ascii=False)
+#     return JSONData
 
 
 
